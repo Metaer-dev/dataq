@@ -1,0 +1,58 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:function_name",
+ "creation": "2024-09-24 18:22:19.514646",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "function_name",
+  "args",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "args",
+   "fieldtype": "Table",
+   "label": "\u53c2\u6570",
+   "options": "GX Args"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text",
+   "label": "\u63cf\u8ff0"
+  },
+  {
+   "fieldname": "function_name",
+   "fieldtype": "Data",
+   "label": "\u89c4\u5219\u540d\u79f0",
+   "unique": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-09-29 12:23:24.647055",
+ "modified_by": "Administrator",
+ "module": "GX Library",
+ "name": "GX Function",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "description"
+}

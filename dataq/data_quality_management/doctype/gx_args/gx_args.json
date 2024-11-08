@@ -1,0 +1,48 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2024-09-22 09:20:07.963083",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "args_name",
+  "args_type",
+  "python_type"
+ ],
+ "fields": [
+  {
+   "fieldname": "args_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "\u53c2\u6570\u540d",
+   "reqd": 1
+  },
+  {
+   "fieldname": "args_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "\u53c2\u6570\u7c7b\u578b",
+   "options": "GX Args Type"
+  },
+  {
+   "fetch_from": "args_type.python_type",
+   "fieldname": "python_type",
+   "fieldtype": "Data",
+   "label": "Python \u7c7b\u578b "
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-09-29 10:56:19.164199",
+ "modified_by": "Administrator",
+ "module": "GX Library",
+ "name": "GX Args",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

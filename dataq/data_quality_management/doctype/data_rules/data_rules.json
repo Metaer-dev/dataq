@@ -1,0 +1,84 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{which_doctype}-{which_gx}-{MM}-{YY}-{####}",
+ "creation": "2024-09-21 22:29:53.353454",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "is_enabled",
+  "which_doctype",
+  "which_gx",
+  "which_function",
+  "args",
+  "description"
+ ],
+ "fields": [
+  {
+   "default": "1",
+   "fieldname": "is_enabled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "\u542f\u7528"
+  },
+  {
+   "fetch_from": "which_gx.function_name",
+   "fieldname": "args",
+   "fieldtype": "Table",
+   "label": "\u53c2\u6570",
+   "options": "Data Rules Args"
+  },
+  {
+   "fieldname": "which_doctype",
+   "fieldtype": "Link",
+   "label": "\u68c0\u9a8c\u6570\u636e",
+   "options": "DocType",
+   "reqd": 1
+  },
+  {
+   "fieldname": "which_gx",
+   "fieldtype": "Link",
+   "label": "\u68c0\u9a8c\u89c4\u5219",
+   "options": "GX Function",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "which_gx.description",
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "\u63cf\u8ff0"
+  },
+  {
+   "fetch_from": "which_gx.function_name",
+   "fieldname": "which_function",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "\u68c0\u9a8c\u51fd\u6570"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-06 14:49:48.211694",
+ "modified_by": "Administrator",
+ "module": "Rentals",
+ "name": "Data Rules",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
