@@ -475,3 +475,17 @@ def get_extension(self):
     import os
 
     return os.path.splitext(self.file_name)
+
+
+import re
+
+
+def remove_brackets_and_extension(filename):
+    filename_without_brackets = re.sub(r"[（(].*?[）)]", "", filename)
+    filename_without_single_bracket = re.sub(
+        r"[（(]|[）)]", "", filename_without_brackets
+    )
+    filename_without_extension = re.sub(
+        r"\.[^\.]+$", "", filename_without_single_bracket
+    )
+    return filename_without_extension.strip()

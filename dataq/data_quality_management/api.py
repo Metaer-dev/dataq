@@ -37,6 +37,10 @@ def gx_validate(doctype, collect, force=True):
         convert_str_to_standard(df)
         df = pd.DataFrame.from_records(df)
 
+    if "doc" in df:
+        # data come from Drive
+        df = pd.DataFrame.from_records(df["doc"])
+
     if not rules:
         return True, df
 
