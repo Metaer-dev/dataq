@@ -1,0 +1,126 @@
+# Translations template for Data Quality Management.
+# Copyright (C) 2024 Metaer
+# This file is distributed under the same license as the Data Quality Management project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Data Quality Management VERSION\n"
+"Report-Msgid-Bugs-To: metaer@iniself.com\n"
+"POT-Creation-Date: 2024-11-20 11:47+0000\n"
+"PO-Revision-Date: 2024-11-20 11:47+0000\n"
+"Last-Translator: metaer@iniself.com\n"
+"Language-Team: metaer@iniself.com\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.13.1\n"
+
+#. Name of a DocType
+#: dataq/data_quality_management/doctype/data_rules/data_rules.json
+msgid "Data Rules"
+msgstr ""
+
+#. Name of a DocType
+#: dataq/data_quality_management/doctype/data_rules_args/data_rules_args.json
+msgid "Data Rules Args"
+msgstr ""
+
+#. Name of a DocType
+#: dataq/data_quality_management/doctype/gx_args/gx_args.json
+msgid "GX Args"
+msgstr ""
+
+#. Name of a DocType
+#: dataq/data_quality_management/doctype/gx_args_type/gx_args_type.json
+msgid "GX Args Type"
+msgstr ""
+
+#. Name of a DocType
+#: dataq/data_quality_management/doctype/gx_function/gx_function.json
+msgid "GX Function"
+msgstr ""
+
+#. Label of the python_type (Data) field in DocType 'GX Args Type'
+#: dataq/data_quality_management/doctype/gx_args_type/gx_args_type.json
+msgid "Python 类型"
+msgstr ""
+
+#. Label of the python_type (Data) field in DocType 'GX Args'
+#: dataq/data_quality_management/doctype/gx_args/gx_args.json
+msgid "Python 类型 "
+msgstr ""
+
+#. Name of a role
+#: dataq/data_quality_management/doctype/data_rules/data_rules.json
+#: dataq/data_quality_management/doctype/gx_args_type/gx_args_type.json
+#: dataq/data_quality_management/doctype/gx_function/gx_function.json
+msgid "System Manager"
+msgstr ""
+
+#: dataq/data_quality_management/api.py:108
+msgid "The following data rules did not pass"
+msgstr ""
+
+#: dataq/util.py:183
+msgid "Validation failed because the doctype could not be found. You should check your files or data, such as whether your file name is correct"
+msgstr ""
+
+#. Label of the args_value (Data) field in DocType 'Data Rules Args'
+#: dataq/data_quality_management/doctype/data_rules_args/data_rules_args.json
+msgid "值"
+msgstr ""
+
+#. Label of the args (Table) field in DocType 'Data Rules'
+#. Label of the args (Table) field in DocType 'GX Function'
+#: dataq/data_quality_management/doctype/data_rules/data_rules.json
+#: dataq/data_quality_management/doctype/gx_function/gx_function.json
+msgid "参数"
+msgstr ""
+
+#. Label of the args_name (Data) field in DocType 'Data Rules Args'
+#. Label of the args_name (Data) field in DocType 'GX Args'
+#: dataq/data_quality_management/doctype/data_rules_args/data_rules_args.json
+#: dataq/data_quality_management/doctype/gx_args/gx_args.json
+msgid "参数名"
+msgstr ""
+
+#. Label of the args_type (Data) field in DocType 'Data Rules Args'
+#. Label of the args_type (Link) field in DocType 'GX Args'
+#: dataq/data_quality_management/doctype/data_rules_args/data_rules_args.json
+#: dataq/data_quality_management/doctype/gx_args/gx_args.json
+msgid "参数类型"
+msgstr ""
+
+#. Label of the is_enabled (Check) field in DocType 'Data Rules'
+#: dataq/data_quality_management/doctype/data_rules/data_rules.json
+msgid "启用"
+msgstr ""
+
+#. Label of the description (Small Text) field in DocType 'Data Rules'
+#. Label of the description (Text) field in DocType 'GX Function'
+#: dataq/data_quality_management/doctype/data_rules/data_rules.json
+#: dataq/data_quality_management/doctype/gx_function/gx_function.json
+msgid "描述"
+msgstr ""
+
+#. Label of the which_function (Data) field in DocType 'Data Rules'
+#: dataq/data_quality_management/doctype/data_rules/data_rules.json
+msgid "检验函数"
+msgstr ""
+
+#. Label of the which_doctype (Link) field in DocType 'Data Rules'
+#: dataq/data_quality_management/doctype/data_rules/data_rules.json
+msgid "检验数据"
+msgstr ""
+
+#. Label of the which_gx (Link) field in DocType 'Data Rules'
+#: dataq/data_quality_management/doctype/data_rules/data_rules.json
+msgid "检验规则"
+msgstr ""
+
+#. Label of the function_name (Data) field in DocType 'GX Function'
+#: dataq/data_quality_management/doctype/gx_function/gx_function.json
+msgid "规则名称"
+msgstr ""
+

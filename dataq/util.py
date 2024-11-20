@@ -2,6 +2,7 @@ from functools import wraps
 import frappe
 from frappe.exceptions import DoesNotExistError
 from frappe.translate import get_all_translations
+from frappe import _
 
 
 def get_decorator_skip_fatherclass_methods_in_childclass(*methods_to_skip):
@@ -177,8 +178,12 @@ def update_cache_for_get(func):
 
             ret = validate_func(value, validate_args)
             if not ret:
-                frappe.log_error(f"failed to get data：{func.__name__}")
-                frappe.throw("failed to get data")
+                frappe.log_error(f"dataq failed to get doctype：{func.__name__}")
+                frappe.throw(
+                    _(
+                        "Validation failed because the doctype could not be found. You should check your files or data, such as whether your file name is correct"
+                    )
+                )
         return ret
 
     return wrapper
@@ -262,7 +267,12 @@ def reverse_all_translation_to_dict(lang):
     return reverse_dict
 
 
-def get_original_doc_name(doctype_name=None, app=None, get_func=get_func, lang="zh"):
+def get_original_doc_name(
+    doctype_name=None,
+    app=None,
+    get_func=get_func,
+    lang=(frappe.session.data.lang or "en"),
+):
     try:
         get_all_translations(lang)[doctype_name]
         original_doc_name = doctype_name
