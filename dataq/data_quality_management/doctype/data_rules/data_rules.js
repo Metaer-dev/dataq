@@ -13,7 +13,7 @@ frappe.ui.form.on('Data Rules', {
     which_gx(frm, ab, cd, ef) {
         let which = frm.doc.which_gx;
         frm.call({
-            method: "rentals.api.get_child_table_data",
+            method: "dataq.data_quality_management.api.get_child_table_data",
             args: {
                 parent_doctype: "GX Function",
                 parent_name: which,

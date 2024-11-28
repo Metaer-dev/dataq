@@ -273,6 +273,9 @@ def get_original_doc_name(
     get_func=get_func,
     lang=(frappe.session.data.lang or "en"),
 ):
+    original_doc_name = frappe.db.exists("DocType", doctype_name)
+    if original_doc_name:
+        return original_doc_name
     try:
         get_all_translations(lang)[doctype_name]
         original_doc_name = doctype_name

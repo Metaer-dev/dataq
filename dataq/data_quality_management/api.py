@@ -108,3 +108,23 @@ def gx_validate(doctype, collect, force=True):
             msg=msg, title=_("The following data rules did not pass"), as_list=True
         )
     return validation_results, df
+
+
+@frappe.whitelist()
+def get_child_table_data(parent_doctype, parent_name, child_table_fieldname):
+    try:
+        # 检查父文档的权限
+        if not frappe.has_permission(parent_doctype, "read", parent_name):
+            frappe.throw(("No permission to read {0}").format(parent_doctype))
+
+        parent_doc = frappe.get_doc(parent_doctype, parent_name)
+
+        # 获取子表数据
+        child_data = parent_doc.get(child_table_fieldname)
+
+        # 转换为可序列化的格式
+        return [child.as_dict() for child in child_data]
+    except frappe.PermissionError:
+        frappe.throw(("No permission to access this data"))
+    except Exception as e:
+        frappe.log_error(f"Error in get_child_table_data: {str(e)}")
