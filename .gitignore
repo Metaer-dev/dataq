@@ -1,3 +1,6 @@
+.eslintrc
+.editorconfig
+.pre-commit-config.yaml
 .DS_Store
 *.pyc
 *.egg-info
