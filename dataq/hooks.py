@@ -137,6 +137,10 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
+doc_events = {
+    "*": {"before_save": "dataq.data_quality_management.api.doctype_validate"}
+}
+
 # doc_events = {
 # 	"*": {
 # 		"on_update": "method",
@@ -241,4 +245,3 @@ app_license = "mit"
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
-

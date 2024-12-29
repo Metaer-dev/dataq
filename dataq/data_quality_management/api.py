@@ -10,6 +10,14 @@ from ..util import (
 )
 
 
+def doctype_validate(doctype, which_event):
+    if frappe.has_permission(doctype.doctype, which_event):
+        data = doctype.as_dict()
+        if doctype.doctype == "DocType":
+            return
+        gx_validate(doctype.doctype, data if isinstance(data, list) else [data], False)
+
+
 def gx_validate(doctype, collect, force=True):
     """
     Args:
