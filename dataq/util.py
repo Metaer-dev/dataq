@@ -168,28 +168,47 @@ def update_cache_for_get(func):
     def wrapper(*args, **kwargs):
         validate_func = kwargs.pop("func", None)
         validate_args = kwargs.pop("args", None)
-
-        value = func(*args, **kwargs)
+        value, func_call_key = func(*args, **kwargs)
         ret = validate_func(value, validate_args)
         if validate_func and not ret:
-            # clear cache
-            func.clear_cache()
-            value = func(*args, **kwargs)
-
-            ret = validate_func(value, validate_args)
+            # get translation in db
+            ret = frappe.get_value(
+                "Translation",
+                {"translated_text": validate_args["key"]},
+                ["source_text"],
+            )
             if not ret:
-                frappe.log_error(f"dataq failed to get doctype：{func.__name__}")
                 frappe.throw(
                     _(
                         "Validation failed because the doctype could not be found. You should check your files or data, such as whether your file name is correct"
                     )
                 )
+            else:
+                user = kwargs.get("user", None)
+                ttl = kwargs.get("ttl", None)
+                shared = kwargs.get("shared", False)
+                func_call_key_cache = {}
+                if frappe.cache.exists(func_call_key, user=user, shared=shared):
+                    func_call_key_cache = frappe.cache.get_value(
+                        func_call_key, user=user, shared=shared
+                    )
+                else:
+                    func_call_key_cache = func(*args, **kwargs)
+                func_call_key_cache[validate_args["key"]] = ret
+                frappe.cache.set_value(
+                    func_call_key,
+                    func_call_key_cache,
+                    expires_in_sec=ttl,
+                    user=user,
+                    shared=shared,
+                )
+
         return ret
 
     return wrapper
 
 
-def redis_cache_with_key(flag="", ttl=None, user=None, shared=False):
+def redis_cache_with_key(flag=""):
     """Decorator to cache method calls and its return values in Redis
 
     :param
@@ -206,25 +225,27 @@ def redis_cache_with_key(flag="", ttl=None, user=None, shared=False):
             frappe.cache.delete_keys(func_key)
 
         func.clear_cache = clear_cache
-        func.ttl = ttl if not callable(ttl) else 3600
 
         @wraps(func)
         def redis_cache_wrapper(*args, **kwargs):
-            # func_call_key = func_key + "." + kwargs.get(flag) + "::" + str(__generate_request_cache_key(args, kwargs))
             func_call_key = func_key + "." + kwargs.get(flag)
+            user = kwargs.get("user", None)
+            ttl = kwargs.get("ttl", None)
+            shared = kwargs.get("shared", False)
             if frappe.cache.exists(func_call_key, user=user, shared=shared):
-                return frappe.cache.get_value(func_call_key, user=user, shared=shared)
+                return (
+                    frappe.cache.get_value(func_call_key, user=user, shared=shared),
+                    func_call_key,
+                )
             val = func(*args, **kwargs)
-            ttl = getattr(func, "ttl", 3600)
+
             frappe.cache.set_value(
                 func_call_key, val, expires_in_sec=ttl, user=user, shared=shared
             )
-            return val
+            return val, func_call_key
 
         return redis_cache_wrapper
 
-    if callable(ttl):
-        return wrapper(ttl)
     return wrapper
 
 
@@ -234,24 +255,6 @@ def get_func(reverse_dict, validate_args):
         zh = validate_args["key"]
         translated = reverse_dict[zh]
     except (KeyError, DoesNotExistError) as e:
-        import subprocess
-
-        frappe.cache.delete_keys("lang_user_translations")
-        frappe.cache.delete_keys("merged_translations")
-        # subprocess.run(['bench', 'clear-website-cache'], check=False)
-        app = get_app_name()
-        subprocess.run(
-            [
-                "bench",
-                "compile-po-to-mo",
-                "--app",
-                validate_args["app"] or app,
-                "--locale",
-                "zh",
-                "--force",
-            ],
-            check=False,
-        )
         return None
     return translated
 
@@ -281,7 +284,12 @@ def get_original_doc_name(
         original_doc_name = doctype_name
     except KeyError as e:
         original_doc_name = reverse_all_translation_to_dict(
-            lang=lang, func=get_func, args={"key": doctype_name, "app": app}
+            lang=lang,
+            func=get_func,
+            args={"key": doctype_name, "app": app},
+            ttl=None,
+            user=None,
+            shared=False,
         )
 
     return original_doc_name
